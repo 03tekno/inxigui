@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Sistem Bilgi Merkezi
+Comment=inxi tabanlı sistem bilgi paneli
+Exec=inxigui
+Icon=system-search
+Terminal=false
+Type=Application
+Categories=System;Settings;
