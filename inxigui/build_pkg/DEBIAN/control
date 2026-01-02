@@ -1,0 +1,10 @@
+Package: inxigui
+Version: 1.0.0
+Section: utils
+Priority: optional
+Architecture: all
+Maintainer: Adınız Soyadınız <eposta@adresiniz.com>
+Depends: python3, python3-gi, gir1.2-gtk-4.0, gir1.2-adw-1, inxi
+Description: inxi aracı için modern GTK4/Libadwaita arayüzü.
+ inxi komut satırı aracını görsel bir arayüze taşır.
+ GTK4 ve Libadwaita kullanılarak geliştirilmiştir.
