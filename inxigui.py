@@ -36,9 +36,8 @@ class InxiSadePanel(Adw.Application):
 
         # SOL MENÜ (Butonlar)
         self.sol_menu = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        self.sol_menu.set_size_request(200, -1)
+        self.sol_menu.set_size_request(220, -1)
         
-        # Kenar boşlukları (AttributeError hatasını önlemek için tek tek set edildi)
         self.sol_menu.set_margin_top(15)
         self.sol_menu.set_margin_bottom(15)
         self.sol_menu.set_margin_start(15)
@@ -58,6 +57,13 @@ class InxiSadePanel(Adw.Application):
         for isim, param in kategoriler:
             btn = Gtk.Button(label=isim)
             btn.add_css_class("pill")
+            
+            # Buton metnini sola yasla
+            label = btn.get_child()
+            if isinstance(label, Gtk.Label):
+                label.set_xalign(0)  # 0: Sol, 0.5: Orta, 1: Sağ
+                label.set_margin_start(10) # Metnin butona çok yapışmaması için küçük boşluk
+            
             btn.connect('clicked', self.on_button_clicked, param)
             self.sol_menu.append(btn)
 
@@ -98,13 +104,11 @@ class InxiSadePanel(Adw.Application):
         env["LC_ALL"] = "tr_TR.UTF-8"
         env["LANG"] = "tr_TR.UTF-8"
         try:
-            # -c 0 parametresi inxi'nin kendi terminal renklendirmesini kapatır
             res = subprocess.run(['inxi', param, '-c', '0'], capture_output=True, text=True, env=env)
             cikti = res.stdout if res.stdout else "Veri bulunamadı."
         except Exception as e:
             cikti = f"Hata: {str(e)}"
         
-        # UI güncellemesi ana thread üzerinde yapılmalıdır
         GLib.idle_add(self.metni_yaz, cikti)
 
     def metni_yaz(self, metin):
