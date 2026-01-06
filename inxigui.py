@@ -9,23 +9,14 @@ from gi.repository import Gtk, Adw, Gdk, GLib
 
 class InxiSadePanel(Adw.Application):
     def __init__(self):
-        super().__init__(application_id='com.debian.inxi.sade.final')
+        super().__init__(application_id='com.debian.inxi.final')
         self.aktif_buton = None 
 
     def do_activate(self):
         self.win = Adw.ApplicationWindow(application=self)
-        self.win.set_title("Sistem Bilgi Merkezi")
+        self.win.set_title("Sistem Bilgi Merkezi (Inxi Gui)")
 
-        # Ekran boyutuna göre pencere ölçeklendirme
-        display = Gdk.Display.get_default()
-        monitors = display.get_monitors()
-        if monitors.get_n_items() > 0:
-            monitor = monitors.get_item(0)
-            geo = monitor.get_geometry()
-            width = int(geo.width * 0.60)
-            height = int(geo.height * 0.8)
-        else:
-            width, height = 900, 700
+        width, height = 1000, 700
             
         self.win.set_default_size(width, height)
 
